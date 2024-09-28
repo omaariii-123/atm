@@ -179,6 +179,16 @@ char *itoa(int nu)
     strrev(number);
     return number;
 }
+void removeSpaces(char *str) {
+    int count = 0; 
+    for (int i = 0; str[i]; i++) {
+        if (str[i] != ' ') {
+            str[count++] = str[i];
+        }
+    }
+    str[count] = '\0';
+}
+
 
 void	registerClient(struct User *u)
 {
@@ -189,6 +199,7 @@ void	registerClient(struct User *u)
     clearstr(2,u->name, u->password);
     write(1, "Please write your Username :\n", 30);
     read(0,u->name,50);
+    removeSpaces(u->name);
     if (!check_reg(u->name))
     {
         write(1,"user already exists !\n",22);
